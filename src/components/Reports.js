@@ -1,49 +1,40 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { fetchSalesCuts } from "../api"; // Asegúrate de que la ruta sea correcta
 
-const SalesReports = () => {
-  const [reports, setReports] = useState([]);
-  const [filter, setFilter] = useState({ start_date: "", end_date: "" });
+const SalesCuts = () => {
+  const [cuts, setCuts] = useState({ morning_sales: 0, evening_sales: 0 });
+  const [date, setDate] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchReports = async () => {
+  const fetchCuts = async () => {
+    setLoading(true);
+    setError("");
     try {
-      const response = await axios.get("/api/sales/reports", {
-        params: filter,
-      });
-      setReports(response.data);
+      const response = await fetchSalesCuts(date); // Usar la función de API
+      setCuts(response); // Aquí ya no necesitas acceder a response.data
     } catch (error) {
-      console.error("Error fetching reports:", error);
+      setError("Error fetching sales cuts");
+      console.error("Error fetching sales cuts:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (filter.start_date && filter.end_date) {
-      fetchReports();
-    }
-  }, [filter]);
-
   return (
     <div>
-      <h1>Cortes de Ventas</h1>
-      <input
-        type="date"
-        placeholder="Fecha Inicio"
-        onChange={(e) => setFilter({ ...filter, start_date: e.target.value })}
-      />
-      <input
-        type="date"
-        placeholder="Fecha Fin"
-        onChange={(e) => setFilter({ ...filter, end_date: e.target.value })}
-      />
-      <ul>
-        {reports.map((report) => (
-          <li key={report.id}>
-            Fecha: {report.date} - Total Ventas: ${report.total_sales}
-          </li>
-        ))}
-      </ul>
+      <h1>Cortes de Ventas por Turno</h1>
+      <input type="date" onChange={(e) => setDate(e.target.value)} />
+      <button onClick={fetchCuts}>Generar Corte</button>
+      {loading && <p>Cargando...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div>
+        <h2>Resultados</h2>
+        <p>Ventas Matutinas: ${cuts.morning_sales.toFixed(2)}</p>
+        <p>Ventas Vespertinas: ${cuts.evening_sales.toFixed(2)}</p>
+      </div>
     </div>
   );
 };
 
-export default SalesReports;
+export default SalesCuts;

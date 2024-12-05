@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createSale, fetchSales, fetchProducts } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
+import { createSale, fetchProducts } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
 
 const Sales = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +30,6 @@ const Sales = () => {
         })),
       };
       await createSale(payload);
-      //await axios.post("/api/sales", payload);
       setCart([]);
       loadProducts();
     } catch (error) {
