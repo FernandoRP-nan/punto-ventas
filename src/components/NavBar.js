@@ -5,7 +5,7 @@ const NavBar = ({ role }) => {
   return (
     <nav>
       <ul>
-        {(role === "GERENTE" || role === "CAJERO") && (
+        {role === "GERENTE" && (
           <li>
             <Link to="/inventory">Inventario</Link>
           </li>
@@ -15,7 +15,7 @@ const NavBar = ({ role }) => {
             <Link to="/purchases">Compras</Link>
           </li>
         )}
-        {(role === "GERENTE" || role === "CAJERO") && (
+        {role === "GERENTE" && (
           <li>
             <Link to="/reports">Reportes</Link>
           </li>
@@ -25,9 +25,11 @@ const NavBar = ({ role }) => {
             <Link to="/sales">Ventas</Link>
           </li>
         )}
-        <li>
-          <Link to="/logs">Logs</Link>
-        </li>
+        {role === "GERENTE" && (
+          <li>
+            <Link to="/logs">Logs</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

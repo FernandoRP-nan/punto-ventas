@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { createSale, fetchSales, fetchProducts } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
 
 const Sales = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cashierId, setCashierId] = useState("");
 
-  const fetchProducts = async () => {
+  const loadProducts = async () => {
     try {
-      const response = await axios.get("/api/inventory");
+      const response = await fetchProducts();
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -29,16 +29,17 @@ const Sales = () => {
           quantity,
         })),
       };
-      await axios.post("/api/sales", payload);
+      await createSale(payload);
+      //await axios.post("/api/sales", payload);
       setCart([]);
-      fetchProducts();
+      loadProducts();
     } catch (error) {
       console.error("Error during checkout:", error);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    loadProducts();
   }, []);
 
   return (
