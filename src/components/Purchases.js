@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchProducts, createPurchase } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
 
 const Purchases = () => {
   const [products, setProducts] = useState([]);
   const [purchase, setPurchase] = useState({ product_id: "", quantity: 0 });
   const [managerId, setManagerId] = useState("");
 
-  const fetchProducts = async () => {
+  const loadProducts = async () => {
     try {
-      const response = await axios.get("/api/inventory");
+      const response = await fetchProducts();
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -22,16 +22,16 @@ const Purchases = () => {
         product_id: purchase.product_id,
         quantity: purchase.quantity,
       };
-      await axios.post("/api/purchases", payload);
+      await createPurchase(payload);
       setPurchase({ product_id: "", quantity: 0 });
-      fetchProducts();
+      loadProducts();
     } catch (error) {
       console.error("Error making purchase:", error);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    loadProducts();
   }, []);
 
   return (

@@ -32,6 +32,9 @@ const SalesCuts = () => {
         <h2>Resultados</h2>
         <p>Ventas Matutinas: ${cuts.morning_sales.toFixed(2)}</p>
         <p>Ventas Vespertinas: ${cuts.evening_sales.toFixed(2)}</p>
+        <p>
+        Total : ${(cuts.morning_sales + cuts.evening_sales).toFixed(2)}
+        </p>
       </div>
     </div>
   );

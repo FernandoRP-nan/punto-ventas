@@ -15,6 +15,10 @@ export const deleteProduct = (id) => API.delete(`/inventory/${id}`);
 export const createSale = (sale) => API.post("/sales", sale);
 export const fetchSales = () => API.get("/sales");
 
+// Compras
+export const createPurchase = (purchase) => API.post("/purchases", purchase);
+export const fetchPurchases = () => API.get("/purchases");
+
 // Cortes de ventas
 export const fetchSalesCuts = async (date) => {
   try {
