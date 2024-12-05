@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { fetchSalesCuts } from "../api"; // Asegúrate de que la ruta sea correcta
+import "./Reports.css"; // Asegúrate de importar el archivo CSS
 
 const SalesCuts = () => {
   const [cuts, setCuts] = useState({ morning_sales: 0, evening_sales: 0 });
@@ -22,19 +23,25 @@ const SalesCuts = () => {
   };
 
   return (
-    <div>
+    <div className="sales-cuts-container">
       <h1>Cortes de Ventas por Turno</h1>
-      <input type="date" onChange={(e) => setDate(e.target.value)} />
-      <button onClick={fetchCuts}>Generar Corte</button>
-      {loading && <p>Cargando...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div>
+      <div className="form-container">
+        <input
+          type="date"
+          onChange={(e) => setDate(e.target.value)}
+          className="date-input"
+        />
+        <button onClick={fetchCuts} className="generate-button">
+          Generar Corte
+        </button>
+      </div>
+      {loading && <p className="loading-text">Cargando...</p>}
+      {error && <p className="error-text">{error}</p>}
+      <div className="results-container">
         <h2>Resultados</h2>
         <p>Ventas Matutinas: ${cuts.morning_sales.toFixed(2)}</p>
         <p>Ventas Vespertinas: ${cuts.evening_sales.toFixed(2)}</p>
-        <p>
-        Total : ${(cuts.morning_sales + cuts.evening_sales).toFixed(2)}
-        </p>
+        <p>Total: ${(cuts.morning_sales + cuts.evening_sales).toFixed(2)}</p>
       </div>
     </div>
   );
