@@ -1,47 +1,59 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchInventoryLogs } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
+import './Logs.css'; // Asegúrate de importar el archivo CSS
 
 const Logs = () => {
-  const [logs, setLogs] = useState([]);
-  const [filter, setFilter] = useState({ user_id: "", action: "" });
+  const [inventoryLogs, setInventoryLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const fetchLogs = async () => {
+  const loadLogs = async () => {
+    setLoading(true);
+    setError("");
     try {
-      const response = await axios.get("/api/logs", { params: filter });
-      setLogs(response.data);
+      const inventoryResponse = await fetchInventoryLogs();
+      // Ordenar los logs por fecha en orden inverso
+      const sortedLogs = inventoryResponse.data.sort((a, b) => new Date(b.date_time) - new Date(a.date_time));
+      setInventoryLogs(sortedLogs);
     } catch (error) {
+      setError("Error fetching logs");
       console.error("Error fetching logs:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchLogs();
-  }, [filter]);
+    loadLogs();
+  }, []);
 
   return (
-    <div>
+    <div className="logs-container">
       <h1>Logs de Movimientos</h1>
-      <input
-        type="text"
-        placeholder="ID Usuario"
-        onChange={(e) => setFilter({ ...filter, user_id: e.target.value })}
-      />
-      <select
-        onChange={(e) => setFilter({ ...filter, action: e.target.value })}
-      >
-        <option value="">Selecciona una acción</option>
-        <option value="VENTA">Venta</option>
-        <option value="COMPRA">Compra</option>
-        <option value="LOGIN">Inicio de Sesión</option>
-      </select>
-      <ul>
-        {logs.map((log) => (
-          <li key={log.id}>
-            Usuario: {log.user_id} - Acción: {log.action} - Detalles:{" "}
-            {log.details}
-          </li>
-        ))}
-      </ul>
+      {loading && <p>Cargando...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <h2>Logs de Inventario</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto ID</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventoryLogs.map((log) => (
+            <tr key={log.id}>
+              <td>{log.product_id}</td>
+              <td>{log.action}</td>
+              <td>{log.quantity}</td>
+              <td>{new Date(log.date_time).toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

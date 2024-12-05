@@ -35,3 +35,6 @@ export const fetchSalesCuts = async (date) => {
     throw error; // Lanza el error para que pueda ser manejado en el componente
   }
 };
+
+// Logs
+export const fetchInventoryLogs = () => API.get("/inventory/inventory-logs");
