@@ -16,6 +16,7 @@
 
 .navbar-item {
   margin: 0 10px; /* Espaciado entre elementos */
+  display: flex; /* Usar flexbox para alinear los elementos */
 }
 
 .navbar-link {
@@ -25,6 +26,7 @@
   padding: 10px 15px; /* Espaciado interno */
   border-radius: 4px; /* Bordes redondeados */
   transition: background-color 0.3s; /* Transición suave para el hover */
+  text-align: center;
 }
 
 .navbar-link:hover {

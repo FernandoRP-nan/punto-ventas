@@ -38,3 +38,23 @@ export const fetchSalesCuts = async (date) => {
 
 // Logs
 export const fetchInventoryLogs = () => API.get("/inventory/inventory-logs");
+
+export const fetchLoginLogs = () => API.get("/login-logs");
+
+// Función para cerrar sesión
+export const logout = async (token) => {
+  try {
+    await API.post(
+      "/auth/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    throw error; // Lanza el error para que pueda ser manejado en el componente
+  }
+};

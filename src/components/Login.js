@@ -23,6 +23,7 @@ const Login = ({ onLogin }) => {
       if (response.ok) {
         // Pasa el token al componente principal
         onLogin(data.token);
+        localStorage.setItem("token", data.token);
       } else {
         alert(data.message); // Muestra un mensaje de error si el login falla
       }

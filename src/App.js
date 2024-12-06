@@ -27,7 +27,8 @@ const App = () => {
         ) : (
           <div>
             <h1>Bienvenido, {user.role}</h1> {/* Muestra el rol del usuario */}
-            <NavBar role={user.role} />
+            <NavBar role={user.role} setUser={setUser} />{" "}
+            {/* Asegúrate de pasar setUser  aquí */}
             <Routes>
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/sales" element={<Sales />} />
