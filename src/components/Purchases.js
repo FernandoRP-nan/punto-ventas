@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchProducts, createPurchase } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
-import "./Purchases.css"; // Asegúrate de importar el archivo CSS
+import { fetchProducts, createPurchase } from "../api";
+import "./Purchases.css";
 
 const Purchases = () => {
   const [products, setProducts] = useState([]);

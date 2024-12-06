@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createSale, fetchProducts } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
-import "./Sales.css"; // Asegúrate de importar el archivo CSS
+import { createSale, fetchProducts } from "../api";
+import "./Sales.css"; 
 
 const Sales = () => {
   const [products, setProducts] = useState([]);
@@ -18,7 +18,6 @@ const Sales = () => {
 
   const handleAddToCart = (product) => {
     if (product.stock > 0) {
-      // Verifica si hay stock disponible
       setCart([...cart, { ...product, quantity: 1 }]);
     } else {
       alert("No hay suficiente stock para agregar este producto al carrito.");
@@ -74,7 +73,7 @@ const Sales = () => {
       <h2>Productos Disponibles</h2>
       <ul className="product-list">
         {products
-          .filter((product) => product.stock > 0) // Filtra productos con stock mayor a 0
+          .filter((product) => product.stock > 0) 
           .map((product) => (
             <li key={product.id} className="product-item">
               <span>

@@ -25,7 +25,6 @@ export const fetchSalesCuts = async (date) => {
     const response = await API.get("/sales/cuts", { params: { date } });
     const data = response.data;
 
-    // Asegúrate de que la respuesta tenga las propiedades esperadas
     return {
       morning_sales: Number(data.morning_sales) || 0,
       evening_sales: Number(data.evening_sales) || 0,
@@ -49,12 +48,12 @@ export const logout = async (token) => {
       {},
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado
+          Authorization: `Bearer ${token}`,
         },
       }
     );
   } catch (error) {
     console.error("Error al cerrar sesión:", error);
-    throw error; // Lanza el error para que pueda ser manejado en el componente
+    throw error; 
   }
 };

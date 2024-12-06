@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { fetchInventoryLogs, fetchLoginLogs } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
-import "./Logs.css"; // Asegúrate de importar el archivo CSS
+import { fetchInventoryLogs, fetchLoginLogs } from "../api";
+import "./Logs.css"; 
 
 const Logs = () => {
   const [inventoryLogs, setInventoryLogs] = useState([]);
   const [loginLogs, setLoginLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState("inventory"); // Estado para controlar la pestaña activa
+  const [activeTab, setActiveTab] = useState("inventory");
 
   const loadLogs = async () => {
     setLoading(true);
     setError("");
     try {
       const inventoryResponse = await fetchInventoryLogs();
-      const loginResponse = await fetchLoginLogs(); // Asegúrate de que esta función esté definida en tu API
-
+      const loginResponse = await fetchLoginLogs(); 
+      
       // Ordenar los logs por fecha en orden inverso
       const sortedInventoryLogs = inventoryResponse.data.sort(
         (a, b) => new Date(b.date_time) - new Date(a.date_time)

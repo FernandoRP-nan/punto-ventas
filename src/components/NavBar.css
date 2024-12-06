@@ -1,34 +1,34 @@
 /* NavBar.css */
 .navbar {
-  background-color: #007bff; /* Color de fondo del navbar */
-  padding: 10px 20px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
+  background-color: #007bff; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
 }
 
 .navbar-list {
-  list-style: none; /* Eliminar viñetas */
-  display: flex; /* Usar flexbox para alinear los elementos */
-  justify-content: space-around; /* Espaciado uniforme entre elementos */
-  margin: 0; /* Eliminar márgenes */
-  padding: 0; /* Eliminar padding */
+  list-style: none;
+  display: flex; 
+  justify-content: space-around; 
+  margin: 0; 
+  padding: 0; 
 }
 
 .navbar-item {
-  margin: 0 10px; /* Espaciado entre elementos */
-  display: flex; /* Usar flexbox para alinear los elementos */
+  margin: 0 10px; 
+  display: flex; 
 }
 
 .navbar-link {
-  color: white; /* Color del texto */
-  text-decoration: none; /* Eliminar subrayado */
-  font-weight: bold; /* Texto en negrita */
-  padding: 10px 15px; /* Espaciado interno */
-  border-radius: 4px; /* Bordes redondeados */
-  transition: background-color 0.3s; /* Transición suave para el hover */
+  color: white;
+  text-decoration: none; 
+  font-weight: bold;
+  padding: 10px 15px; 
+  border-radius: 4px; 
+  transition: background-color 0.3s;
   text-align: center;
 }
 
 .navbar-link:hover {
-  background-color: #0056b3; /* Color de fondo al pasar el mouse */
+  background-color: #0056b3;
 }

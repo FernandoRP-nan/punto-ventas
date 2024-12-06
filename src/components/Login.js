@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css"; // Importa el archivo CSS
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
   // Definir el estado para el nombre de usuario y la contraseña
@@ -16,16 +16,16 @@ const Login = ({ onLogin }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }), // Envia los datos correctamente
+        body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
 
       if (response.ok) {
-        // Pasa el token al componente principal
+
         onLogin(data.token);
         localStorage.setItem("token", data.token);
       } else {
-        alert(data.message); // Muestra un mensaje de error si el login falla
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error al autenticar:", error);
@@ -44,8 +44,8 @@ const Login = ({ onLogin }) => {
           <input
             type="text"
             id="username"
-            value={username} // Asegúrate de que el valor del input esté vinculado al estado
-            onChange={(e) => setUsername(e.target.value)} // Actualiza el estado de 'username' con el texto ingresado
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Introduce tu nombre de usuario"
             className="form-input"
           />
@@ -58,8 +58,8 @@ const Login = ({ onLogin }) => {
           <input
             type="password"
             id="password"
-            value={password} // Asegúrate de que el valor del input esté vinculado al estado
-            onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de 'password' con el texto ingresado
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Introduce tu contraseña"
             className="form-input"
           />

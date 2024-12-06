@@ -3,19 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Inventory from "./components/Inventory";
 import Sales from "./components/Sales";
-import Purchases from "./components/Purchases"; // Crear este componente
-import Reports from "./components/Reports"; // Crear este componente
+import Purchases from "./components/Purchases"; 
+import Reports from "./components/Reports"; 
 import Logs from "./components/Logs";
 import NavBar from "./components/NavBar";
 import { jwtDecode } from "jwt-decode";
 
 const App = () => {
-  const [user, setUser] = useState(null); // Almacena el usuario actual
+  const [user, setUser] = useState(null);
 
   // Maneja el inicio de sesión, actualiza el estado con los datos del usuario
   const handleLogin = (token) => {
-    const decodedToken = jwtDecode(token); // Decodifica el token
-    setUser({ role: decodedToken.role, token }); // Establece el rol y el token en el estado
+    const decodedToken = jwtDecode(token);
+    setUser({ role: decodedToken.role, token }); 
   };
 
   return (
@@ -26,9 +26,13 @@ const App = () => {
           <Login onLogin={handleLogin} />
         ) : (
           <div>
-            <h1>Bienvenido, {user.role}</h1> {/* Muestra el rol del usuario */}
+            <h1>Bienvenido, {user.role}</h1> {
+              
+            }
             <NavBar role={user.role} setUser={setUser} />{" "}
-            {/* Asegúrate de pasar setUser  aquí */}
+            {
+
+            }
             <Routes>
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/sales" element={<Sales />} />

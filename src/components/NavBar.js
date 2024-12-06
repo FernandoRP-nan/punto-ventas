@@ -1,18 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../api"; // Asegúrate de ajustar la ruta según tu estructura
-import "./NavBar.css"; // Asegúrate de importar el archivo CSS
+import { logout } from "../api"; 
+import "./NavBar.css";
 
 const NavBar = ({ role, setUser }) => {
-  const navigate = useNavigate(); // Hook para redirigir después de cerrar sesión
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const token = localStorage.getItem("token"); // Asumiendo que guardas el token en localStorage
-      await logout(token); // Llama a la función de logout
-      setUser(null); // Limpia el estado del usuario
-      localStorage.removeItem("token"); // Elimina el token del localStorage
-      navigate("/login"); // Redirige a la página de inicio de sesión
+      const token = localStorage.getItem("token"); 
+      await logout(token); 
+      setUser(null); 
+      localStorage.removeItem("token"); 
+      navigate("/login"); 
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }

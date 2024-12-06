@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { fetchSalesCuts } from "../api"; // Asegúrate de que la ruta sea correcta
-import "./Reports.css"; // Asegúrate de importar el archivo CSS
+import { fetchSalesCuts } from "../api"; 
+import "./Reports.css";
 
 const SalesCuts = () => {
   const [cuts, setCuts] = useState({ morning_sales: 0, evening_sales: 0 });
@@ -12,8 +12,8 @@ const SalesCuts = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetchSalesCuts(date); // Usar la función de API
-      setCuts(response); // Aquí ya no necesitas acceder a response.data
+      const response = await fetchSalesCuts(date); 
+      setCuts(response);
     } catch (error) {
       setError("Error fetching sales cuts");
       console.error("Error fetching sales cuts:", error);
