@@ -73,21 +73,23 @@ const Sales = () => {
       />
       <h2>Productos Disponibles</h2>
       <ul className="product-list">
-        {products.map((product) => (
-          <li key={product.id} className="product-item">
-            <span>
-              {product.name} - Precio: $
-              {parseFloat(product.sale_price).toFixed(2)} - Stock:{" "}
-              {product.stock}
-            </span>
-            <button
-              onClick={() => handleAddToCart(product)}
-              className="add-to-cart-button"
-            >
-              Agregar al carrito
-            </button>
-          </li>
-        ))}
+        {products
+          .filter((product) => product.stock > 0) // Filtra productos con stock mayor a 0
+          .map((product) => (
+            <li key={product.id} className="product-item">
+              <span>
+                {product.name} - Precio: $
+                {parseFloat(product.sale_price).toFixed(2)} - Stock:{" "}
+                {product.stock}
+              </span>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="add-to-cart-button"
+              >
+                Agregar al carrito
+              </button>
+            </li>
+          ))}
       </ul>
       <h2>Carrito</h2>
       <ul className="cart-list">

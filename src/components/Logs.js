@@ -88,7 +88,6 @@ const Logs = () => {
 
       {activeTab === "login" && (
         <div>
-          <h2>Logs de Inicio de Sesión</h2>
           <table>
             <thead>
               <tr>

@@ -22,15 +22,22 @@ const NavBar = ({ role, setUser }) => {
     <nav className="navbar">
       <ul className="navbar-list">
         {role === "GERENTE" && (
+          <li className="navbar-item">
+            <Link to="/purchases" className="navbar-link">
+              Compras
+            </Link>
+          </li>
+        )}
+        {(role === "GERENTE" || role === "CAJERO") && (
           <>
             <li className="navbar-item">
-              <Link to="/inventory" className="navbar-link">
-                Inventario
+              <Link to="/sales" className="navbar-link">
+                Ventas
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/purchases" className="navbar-link">
-                Compras
+              <Link to="/inventory" className="navbar-link">
+                Inventario
               </Link>
             </li>
             <li className="navbar-item">
@@ -44,13 +51,6 @@ const NavBar = ({ role, setUser }) => {
               </Link>
             </li>
           </>
-        )}
-        {(role === "GERENTE" || role === "CAJERO") && (
-          <li className="navbar-item">
-            <Link to="/sales" className="navbar-link">
-              Ventas
-            </Link>
-          </li>
         )}
         <li className="navbar-item">
           <button onClick={handleLogout} className="navbar-link">

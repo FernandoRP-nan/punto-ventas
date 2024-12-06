@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Login.css"; // Importa el archivo CSS
 
 const Login = ({ onLogin }) => {
   // Definir el estado para el nombre de usuario y la contraseña
@@ -17,7 +18,6 @@ const Login = ({ onLogin }) => {
         },
         body: JSON.stringify({ username, password }), // Envia los datos correctamente
       });
-
       const data = await response.json();
 
       if (response.ok) {
@@ -34,32 +34,39 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+    <div className="login-container">
+      <h2 className="login-title">Inicio de sesión</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-field">
+          <label htmlFor="username" className="form-label">
+            Usuario:
+          </label>
           <input
             type="text"
             id="username"
             value={username} // Asegúrate de que el valor del input esté vinculado al estado
             onChange={(e) => setUsername(e.target.value)} // Actualiza el estado de 'username' con el texto ingresado
             placeholder="Introduce tu nombre de usuario"
+            className="form-input"
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="form-field">
+          <label htmlFor="password" className="form-label">
+            Contraseña:
+          </label>
           <input
             type="password"
             id="password"
             value={password} // Asegúrate de que el valor del input esté vinculado al estado
             onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de 'password' con el texto ingresado
             placeholder="Introduce tu contraseña"
+            className="form-input"
           />
         </div>
-
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </div>
   );
